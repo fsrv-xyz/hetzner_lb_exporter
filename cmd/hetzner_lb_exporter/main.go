@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
 	"os"
@@ -12,11 +11,9 @@ import (
 	"time"
 
 	"github.com/hetznercloud/hcloud-go/hcloud"
-	"gopkg.in/alecthomas/kingpin.v2"
-)
-
-import (
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 const (
@@ -85,7 +82,6 @@ func init() {
 		metricLoadBalancerServiceCount,
 		metricLoadBalancerTargetHealthStatus,
 		metricLoadBalancerTraffic,
-
 	)
 }
 
