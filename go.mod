@@ -3,7 +3,7 @@ module github.com/fsrv-xyz/hetzner_lb_exporter
 go 1.18
 
 require (
-	github.com/hetznercloud/hcloud-go v1.35.2
+	github.com/hetznercloud/hcloud-go v1.35.3
 	github.com/prometheus/client_golang v1.13.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
@@ -19,8 +19,8 @@ require (
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/stretchr/testify v1.8.0 // indirect
-	golang.org/x/net v0.0.0-20220909164309-bea034e7d591 // indirect
-	golang.org/x/sys v0.0.0-20220915200043-7b5979e65e41 // indirect
+	golang.org/x/net v0.0.0-20220923203811-8be639271d50 // indirect
+	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 )
