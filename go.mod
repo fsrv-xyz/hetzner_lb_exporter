@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/hetznercloud/hcloud-go v1.35.3
-	github.com/prometheus/client_golang v1.13.0
+	github.com/prometheus/client_golang v1.13.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
 
