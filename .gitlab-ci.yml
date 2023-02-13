@@ -3,69 +3,15 @@ stages:
   - test
   - release
   - build
-  - update
 
-lint:
-  image: registry.gitlab.com/gitlab-org/gitlab-build-images:golangci-lint-alpine
+.go_template_defaults:
+  stage: test
   allow_failure: true
-  stage: test
-  script:
-    - golangci-lint run ./... --issues-exit-code 0 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[] | "\(.location.path):\(.location.lines.begin) \(.description)"'
-  artifacts:
-    reports:
-      codequality: gl-code-quality-report.json
-    paths:
-      - gl-code-quality-report.json
-
-vulnerability_check:
-  image: golang:latest
-  stage: test
-  before_script:
-    - go install golang.org/x/vuln/cmd/govulncheck@latest
-  script:
-    - govulncheck ./...
-  needs:
-    - lint
-
-go_fmt:
-  image: golang
-  stage: test
-  script:
-    - go fmt ./...
-
-go_test:
-  image: golang:latest
-  stage: test
-  before_script:
-    - go install gotest.tools/gotestsum@latest
-  script:
-    - go test -v ./... -coverprofile=coverage.txt -covermode count
-    - go tool cover -func coverage.txt
-    - go get github.com/boumenot/gocover-cobertura
-    - go run github.com/boumenot/gocover-cobertura < coverage.txt > coverage.xml
-    - /go/bin/gotestsum --junitfile report.xml --format testname
-  coverage: '/^total:\t+\(statements\)\t+(\d+\.\d+)%/'
-  artifacts:
-    when: always
-    reports:
-      junit: report.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage.xml
-
-semantic_release:
+.semver_template_defaults:
   stage: release
-  image: registry.fsrv.services/fsrvcorp/container/payipi:latest
-  variables:
-    GIT_STRATEGY: clone
-    GIT_DEPTH: 0
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  script:
-    - get-next-version -f json
-    - VERSION="$(get-next-version -f json | jq -r 'select(.hasNextVersion==true) | .version')"
-    - echo $VERSION
-    - test -z "$VERSION" || curl --silent --request POST --header "PRIVATE-TOKEN:${CI_BOT_TOKEN}" "https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/repository/tags?tag_name=${VERSION}&ref=${CI_DEFAULT_BRANCH}" | jq
+include:
+  - remote: https://gitlab.com/bonsai-oss/organization/ci-templates/-/raw/main/templates/language/go.yml
+  - remote: https://gitlab.com/bonsai-oss/organization/ci-templates/-/raw/main/templates/release/semver.yml
 
 build:
   stage: build
@@ -77,6 +23,7 @@ build:
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
   only:
     - tags
+    - master
   script:
     - >-
       /kaniko/executor
@@ -85,11 +32,3 @@ build:
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
       --destination "${CI_REGISTRY_IMAGE}:latest"
-
-trigger dimp:
-  trigger: fsrvcorp/misc/dimp
-  variables:
-    DIMP_PROJECT_ID: $CI_PROJECT_ID
-  stage: update
-  only:
-    - schedules
