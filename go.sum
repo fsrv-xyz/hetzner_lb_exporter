@@ -17,8 +17,8 @@ github.com/golang/protobuf v1.5.2 h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw
 github.com/golang/protobuf v1.5.2/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
 github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
-github.com/hetznercloud/hcloud-go v1.39.0 h1:RUlzI458nGnPR6dlcZlrsGXYC1hQlFbKdm8tVtEQQB0=
-github.com/hetznercloud/hcloud-go v1.39.0/go.mod h1:mepQwR6va27S3UQthaEPGS86jtzSY9xWL1e9dyxXpgA=
+github.com/hetznercloud/hcloud-go v1.40.0 h1:rchS+LVd80GuAOQUM5pLs0Fn7tb4PflPCuxskLYc1JQ=
+github.com/hetznercloud/hcloud-go v1.40.0/go.mod h1:jcKomw7kDIjrJ9FI72S/RdRPK8X8arYzEnXjRM/uXT8=
 github.com/matttproud/golang_protobuf_extensions v1.0.4 h1:mmDVorXM7PCGKw94cs5zkfA9PSy5pEvNWRP0ET0TIVo=
 github.com/matttproud/golang_protobuf_extensions v1.0.4/go.mod h1:BSXmuO+STAnVfrANrmjBb36TMTDstsz7MSK+HVaYKv4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
