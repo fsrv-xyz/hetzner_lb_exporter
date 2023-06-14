@@ -1,4 +1,4 @@
-FROM golang@sha256:f28300f5f485a115156f1de0e56e81ba3785e164d66f1d029fe745a7836e944b AS builder
+FROM golang@sha256:519184356f970849c5f58764014c13ce20c3a3cadc13be7b8d87269bc5554ccd AS builder
 WORKDIR /build
 COPY . /build
 RUN CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o /build/exporter cmd/hetzner_lb_exporter/main.go
