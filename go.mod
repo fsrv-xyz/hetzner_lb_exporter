@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/alecthomas/kingpin/v2 v2.3.2
-	github.com/hetznercloud/hcloud-go v1.46.1
+	github.com/hetznercloud/hcloud-go v1.47.0
 	github.com/prometheus/client_golang v1.16.0
 )
 
