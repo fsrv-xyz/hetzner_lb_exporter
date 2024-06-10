@@ -2,11 +2,11 @@ module github.com/fsrv-xyz/hetzner_lb_exporter
 
 go 1.21
 
-toolchain go1.22.3
+toolchain go1.22.4
 
 require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/hetznercloud/hcloud-go v1.55.0
+	github.com/hetznercloud/hcloud-go v1.56.0
 	github.com/prometheus/client_golang v1.19.1
 )
 
