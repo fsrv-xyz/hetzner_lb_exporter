@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/alecthomas/kingpin/v2"
-	"github.com/hetznercloud/hcloud-go/hcloud"
+	"github.com/hetznercloud/hcloud-go/v2/hcloud"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -99,8 +99,8 @@ func refreshWorker(ctx context.Context, done chan any, client *hcloud.Client) {
 			}
 
 			for _, loadbalancer := range loadbalancers {
-				metricLoadBalancerTargetCount.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(loadbalancer.ID), labelLoadBalancerName: loadbalancer.Name}).Set(float64(len(loadbalancer.Targets)))
-				metricLoadBalancerServiceCount.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(loadbalancer.ID), labelLoadBalancerName: loadbalancer.Name}).Set(float64(len(loadbalancer.Services)))
+				metricLoadBalancerTargetCount.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(int(loadbalancer.ID)), labelLoadBalancerName: loadbalancer.Name}).Set(float64(len(loadbalancer.Targets)))
+				metricLoadBalancerServiceCount.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(int(loadbalancer.ID)), labelLoadBalancerName: loadbalancer.Name}).Set(float64(len(loadbalancer.Services)))
 
 				for _, target := range loadbalancer.Targets {
 					for _, health := range target.HealthStatus {
@@ -113,12 +113,12 @@ func refreshWorker(ctx context.Context, done chan any, client *hcloud.Client) {
 						case hcloud.LoadBalancerTargetHealthStatusStatusUnknown:
 							status = 3
 						}
-						metricLoadBalancerTargetHealthStatus.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(loadbalancer.ID), labelEndpointListenPort: strconv.Itoa(health.ListenPort), labelTargetIdentifier: target.IP.IP}).Set(float64(status))
+						metricLoadBalancerTargetHealthStatus.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(int(loadbalancer.ID)), labelEndpointListenPort: strconv.Itoa(health.ListenPort), labelTargetIdentifier: target.IP.IP}).Set(float64(status))
 					}
 				}
 
-				metricLoadBalancerTraffic.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(loadbalancer.ID), labelTrafficDirection: "in"}).Set(float64(loadbalancer.IngoingTraffic))
-				metricLoadBalancerTraffic.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(loadbalancer.ID), labelTrafficDirection: "out"}).Set(float64(loadbalancer.OutgoingTraffic))
+				metricLoadBalancerTraffic.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(int(loadbalancer.ID)), labelTrafficDirection: "in"}).Set(float64(loadbalancer.IngoingTraffic))
+				metricLoadBalancerTraffic.With(prometheus.Labels{labelLoadBalancerID: strconv.Itoa(int(loadbalancer.ID)), labelTrafficDirection: "out"}).Set(float64(loadbalancer.OutgoingTraffic))
 			}
 		}
 	}
