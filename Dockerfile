@@ -4,7 +4,7 @@ COPY . /build
 RUN CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o /build/exporter cmd/hetzner_lb_exporter/main.go
 RUN ls -la /build
 
-FROM alpine:latest@sha256:b97e2a89d0b9e4011bb88c02ddf01c544b8c781acf1f4d559e7c8f12f1047ac3 as alpine
+FROM alpine:latest@sha256:56fa17d2a7e7f168a043a2712e63aed1f8543aeafdcee47c58dcffe38ed51099 as alpine
 RUN apk add -U --no-cache ca-certificates
 
 FROM scratch
