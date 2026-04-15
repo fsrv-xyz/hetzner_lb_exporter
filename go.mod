@@ -2,7 +2,7 @@ module github.com/fsrv-xyz/hetzner_lb_exporter
 
 go 1.25.0
 
-toolchain go1.26.1
+toolchain go1.26.2
 
 require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
