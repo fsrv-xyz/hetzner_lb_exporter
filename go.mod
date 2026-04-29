@@ -6,7 +6,7 @@ toolchain go1.26.2
 
 require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/hetznercloud/hcloud-go/v2 v2.38.0
+	github.com/hetznercloud/hcloud-go/v2 v2.39.0
 	github.com/prometheus/client_golang v1.23.2
 )
 
