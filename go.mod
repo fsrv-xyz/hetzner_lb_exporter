@@ -2,11 +2,11 @@ module github.com/fsrv-xyz/hetzner_lb_exporter
 
 go 1.25.0
 
-toolchain go1.26.5
+toolchain go1.27.1
 
 require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/hetznercloud/hcloud-go/v2 v2.47.0
+	github.com/hetznercloud/hcloud-go/v2 v2.48.0
 	github.com/prometheus/client_golang v1.24.1
 )
 
@@ -19,8 +19,8 @@ require (
 	github.com/prometheus/common v0.70.1 // indirect
 	github.com/prometheus/procfs v0.21.1 // indirect
 	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
-	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.40.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
