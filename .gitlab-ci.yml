@@ -4,13 +4,11 @@ stages:
   - release
   - build
 
-.go_template_defaults:
-  stage: test
-.semver_template_defaults:
-  stage: release
 include:
-  - remote: https://gitlab.com/bonsai-oss/organization/ci-templates/-/raw/main/templates/language/go.yml
-  - remote: https://gitlab.com/bonsai-oss/organization/ci-templates/-/raw/main/templates/release/semver.yml
+  - component: $CI_SERVER_FQDN/fsrvcorp/ci-components/golang@0.1.0
+  - component: $CI_SERVER_FQDN/fsrvcorp/ci-components/semver@0.1.0
+    inputs:
+      stage: release
 
 build:
   stage: build
